@@ -1,9 +1,5 @@
 # coffee_shop
 
-branches:
-
-Lesson_1
-
 ## Project setup
 ```
 npm install
