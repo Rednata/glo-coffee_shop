@@ -76,7 +76,7 @@
 import NavBarComponent from '@/components/NavBarComponent.vue'
 import CardComponent from '@/components/CardComponent.vue'
   export default {
-    components: {CardComponent}
+    components: {NavBarComponent, CardComponent}
   }
 </script>
 

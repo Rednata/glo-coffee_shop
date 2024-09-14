@@ -6,7 +6,7 @@
                 <ul class="footer d-flex flex-wrap">
                     <li class=" footer__item">
                         <a href="./index.html">
-                            <img src="logo/Logo_black.svg" alt="logo">
+                            <img src="@/assets/logo/Logo_black.svg" alt="logo">
                         </a>
                     </li>
                     <li class="footer__item">
@@ -21,7 +21,7 @@
                 </ul>
             </div>
         </div>
-        <img class="beanslogo" src="logo/Beans_logo_dark.svg" alt="Beans logo">
+        <img class="beanslogo" src="@/assets/logo/Beans_logo_dark.svg" alt="Beans logo">
     </div>
   </footer>
 </template>
