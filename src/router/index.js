@@ -1,21 +1,21 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 
-import Hero from '@/views/Hero.vue';
-import OurCoffeeView from '@/views/OurCoffee.vue';
-import GoodsPageView from '@/views/GoodsPage.vue';
-import ContactsPageView from '@/views/ContactsPage.vue';
-import ThanksPageView from '@/views/ThanksPage.vue';
+import HeroView from '@/views/HeroView.vue';
+import OurCoffeeView from '@/views/OurCoffeeView.vue';
+import ForYourPleasureView from '@/views/ForYourPleasureView.vue';
+import ContactsUsView from '@/views/ContactsUsView.vue';
+import ThankYouView from '@/views/ThankYouView.vue';
 
 
 Vue.use(VueRouter);
 
 const routes = [
-  { path: '/', component: Hero },
-  { path: '/our-coffee.html', component: OurCoffeeView },
-  { path: '/goodspage.html', component: GoodsPageView },
-  { path: '/contacts.html', component: ContactsPageView },
-  { path: '/thanks.html', component: ThanksPageView }
+  { path: '/', component: HeroView },
+  { path: '/our-coffee', component: OurCoffeeView },
+  { path: '/for-your-pleasure', component: ForYourPleasureView },
+  { path: '/contact-us', component: ContactsUsView },
+  { path: '/thank-you', component: ThankYouView }
 ];
 
 const router = new VueRouter({
