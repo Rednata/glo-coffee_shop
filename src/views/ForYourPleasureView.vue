@@ -54,7 +54,16 @@
 import NavBarComponent from '@/components/NavBarComponent.vue'
 import ProductCard from '@/components/ProductCard.vue'
   export default {
-    components: {NavBarComponent, ProductCard}
+    components: {NavBarComponent, ProductCard},
+    data () {
+      return {
+        productCards: [
+          {id: 0, text: 'Solimo Coffee Beans 2k', imgUrl: 'good-1.jpg', price: 10.73},
+          {id: 1, text: 'Solimo Coffee Beans 2k', imgUrl: 'coffee-2.jpg', price: 10.73},
+          {id: 2, text: 'Solimo Coffee Beans 2k', imgUrl: 'coffee-3.jpg', price: 10.73},
+        ]
+      }
+    }
   }
 </script>
 
