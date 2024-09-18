@@ -4,14 +4,21 @@
       <div class="row">
         <div class="col-lg-6 offset-lg-3">
           <ul class="footer d-flex flex-wrap">
-            <li v-for="link in links" class=" footer__item" :key="link.id">
+            <nav-link
+              v-for="link in links" :key="link.id"
+              class="footer__item"
+              :text="link.text"
+              :link="link.link"
+              :icon="link.icon"
+            />
+            <!-- <li v-for="link in links" class=" footer__item" :key="link.id">
               <router-link v-if="link.icon" :to="link.link">
                 <img v-if="link.icon" :src="require(`@/assets/logo/${link.icon}`)" :alt="link.icon">
               </router-link>
               <router-link v-else :to="link.link">
                 {{ link.text }}
               </router-link>
-            </li>
+            </li> -->
           </ul>
         </div>
       </div>
@@ -21,7 +28,9 @@
 </template>
 
 <script>
+import NavLink from './NavLink.vue';
   export default {
+    components: {NavLink},
     data () {
       return {
         links: [

@@ -9,7 +9,7 @@
         </div>
         <div class="row">
           <div class="col-lg-10 offset-lg-1">
-            <h1 class="title-big">Everything You Love About Coffee</h1>
+            <header-title title="Everything You Love About Coffee" class="title-big" />
             <img class="beanslogo" src="@/assets/logo/Beans_logo.svg" alt="Beans logo">
             <div class="preview__subtitle">We makes every day full of energy and taste</div>
             <div class="preview__subtitle">Want to try our beans?</div>
@@ -47,9 +47,16 @@
         <div class="row">
           <div class="col-lg-10 offset-lg-1">
             <div class="best__wrapper">
+              <product-card
+                v-for="item in bestsellers"
+                classItem="best__item"
+                :name="item.text"
+                :price="item.price"
+                :image="item.imgUrl"
+              />
+              <!-- <product-card />
               <product-card />
-              <product-card />
-              <product-card />
+              <product-card /> -->
             </div>
           </div>
         </div>
@@ -61,11 +68,12 @@
 <script>
 import NavBarComponent from '@/components/NavBarComponent.vue'
 import ProductCard from '@/components/ProductCard.vue'
+import HeaderTitle from '@/components/HeaderTitle.vue';
   export default {
-    components: {NavBarComponent, ProductCard},
+    components: {NavBarComponent, ProductCard, HeaderTitle},
     data () {
       return {
-        productCards: [
+        bestsellers: [
           {id: 0, text: 'Solimo Coffee Beans 2kg', imgUrl: 'coffee-1.jpg', price: 10.73},
           {id: 1, text: 'Presto Coffee Beans 1kg', imgUrl: 'coffee-2.jpg', price: 15.99},
           {id: 2, text: 'AROMISTICO Coffee 1kg', imgUrl: 'coffee-3.jpg', price: 6.99},
