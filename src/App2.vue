@@ -2,11 +2,11 @@
   <div>
     <h1>Theme: {{ title }}</h1>
     <ul>
-      <li v-for="post in posts" :class="post.checked ? 'checked' : ''">
-        <img :src="require(`@/assets/ls-4/images/${post.icon}`)" :alt="post.icon">
-        <span>{{ post.text }}</span>
-      </li>
-
+      <list-item
+        v-for="post in posts" :class="post.checked ? 'checked' : ''"
+        :text="post.text"
+        :icon="post.icon"
+      />
     </ul>
 
     <span class="total">Всего строк: {{ totalCount }}</span>
@@ -14,10 +14,12 @@
 </template>
 
 <script>
+import ListItem from './components/ListItem.vue';
   export default {
+    components: {ListItem},
     data () {
       return {
-        title: 'Data, Computed',
+        title: 'Props',
         posts: [
           {id: 0, text: 'Текст первый', icon: 'setting.png', checked: false},
           {id: 1, text: 'Текст второй', icon: 'user.png', checked: true},
