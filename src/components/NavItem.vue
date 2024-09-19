@@ -1,10 +1,10 @@
 <template>
-  <li :class="classItem" >
-    <router-link v-if="icon" :to="link">
+  <li :class="classLink" >
+    <!-- <router-link v-if="icon" :to="link">
       <img :src="require(`@/assets/logo/${icon}`)" :alt="icon">
-    </router-link>
-    <router-link :to="link">
-      {{ text }}
+    </router-link> -->
+    <router-link :to="link">{{ text }}
+      <slot></slot>
     </router-link>
   </li>
 </template>
@@ -12,15 +12,18 @@
 <script>
   export default {
     props: {
-      classItem: String,
-      text: {
-        type: String,
-        required: true,
-        default: ''
-      },
       link: {
         type: String,
         required: true,
+      },
+      classLink: {
+        type: String,
+        required: true
+      },
+      text: {
+        type: String,
+        required: false,
+        default: ''
       },
       icon: {
         type: String,
