@@ -1,10 +1,7 @@
 <template>
   <li :class="classLink" >
-    <!-- <router-link v-if="icon" :to="link">
-      <img :src="require(`@/assets/logo/${icon}`)" :alt="icon">
-    </router-link> -->
     <router-link :to="link">{{ text }}
-      <slot></slot>
+      <slot/>
     </router-link>
   </li>
 </template>

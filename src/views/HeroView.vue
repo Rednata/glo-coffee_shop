@@ -13,12 +13,13 @@
             <img class="beanslogo" src="@/assets/logo/Beans_logo.svg" alt="Beans logo">
             <div class="preview__subtitle">We makes every day full of energy and taste</div>
             <div class="preview__subtitle">Want to try our beans?</div>
-            <a href="./coffeepage.html" class="preview__btn">More</a>
+            <a @click.prevent="smoothScroll" href="our-coffee" class="preview__btn">More</a>
+            <!-- <router-link to="our-coffee" class="preview__btn">More</router-link> -->
           </div>
         </div>
       </div>
     </div>
-    <section class="about">
+    <section class="about" ref="about">
       <div class="container">
         <div class="row">
           <div class="col-lg-6 offset-lg-3">
@@ -41,22 +42,20 @@
         </div>
       </div>
     </section>
-    <section class="best">
+    <section class="best" ref="ourBest">
       <div class="container">
         <div class="title">Our best</div>
         <div class="row">
           <div class="col-lg-10 offset-lg-1">
             <div class="best__wrapper">
               <product-card
-                v-for="item in bestsellers"
+                v-for="card in bestsellers"
                 classItem="best__item"
-                :name="item.text"
-                :price="item.price"
-                :image="item.imgUrl"
+                :name="card.text"
+                :price="card.price"
+                :image="card.imgUrl"
+                :key="card.id"
               />
-              <!-- <product-card />
-              <product-card />
-              <product-card /> -->
             </div>
           </div>
         </div>
@@ -66,6 +65,7 @@
 </template>
 
 <script>
+import { scrollIntoView } from "seamless-scroll-polyfill";
 import NavBarComponent from '@/components/NavBarComponent.vue'
 import ProductCard from '@/components/ProductCard.vue'
 import HeaderTitle from '@/components/HeaderTitle.vue';
@@ -79,7 +79,21 @@ import HeaderTitle from '@/components/HeaderTitle.vue';
           {id: 2, text: 'AROMISTICO Coffee 1kg', imgUrl: 'coffee-3.jpg', price: 6.99},
         ]
       }
-    }
+    },
+    methods: {
+      smoothScroll() {
+        // this.$refs.ourBest.scrollIntoView({
+        //   block: 'start',
+        //   behavior: 'smooth'
+        // });
+        scrollIntoView(this.$refs.ourBest, {
+          behavior: "smooth", block: "center", inline: "center"
+        });
+      }
+    },
+    // mounted() {
+    //   this.smoothScroll()
+    // }
   }
 </script>
 

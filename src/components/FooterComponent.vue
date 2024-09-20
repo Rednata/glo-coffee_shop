@@ -6,10 +6,10 @@
           <ul class="footer d-flex flex-wrap">
             <nav-item
               classLink="footer__item"
-              :link="links.header.icon"
-              :icon="links.header.icon"
+              :link="links.footer.link"
+              :icon="links.footer.icon"
             >
-              <img :src="require(`@/assets/logo/${links.header.icon}`)" :alt="links.header.icon">
+              <img :src="require(`@/assets/logo/${links.footer.icon}`)" :alt="links.footer.icon">
             </nav-item>
             <nav-item
               v-for="link in links.other" :key="link.id"
@@ -34,7 +34,7 @@ import NavItem from './NavItem.vue';
     data () {
       return {
         links: {
-          header: {
+          footer: {
             id: 0, link: '/', icon: 'Logo_black.svg'
           },
           other: [
