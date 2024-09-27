@@ -1,13 +1,15 @@
 import Vue, { defineAsyncComponent } from "vue";
 import Vuex from 'vuex';
 import links from "./links";
-import cards from "./cards";
+import bestsellers from "./bestsellers";
+import coffee from "./coffee";
+import goods from "./goods";
 
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
   modules: {
-    links, cards
+    links, bestsellers, coffee, goods
   }
 });
 
