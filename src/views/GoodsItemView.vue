@@ -52,7 +52,8 @@ import NavBarComponent from '@/components/NavBarComponent.vue';
       return this.$route.name
     },
     card() {
-      const card = this.$store.getters['getProductById'](this.$route.params.id)
+      const pageGetter = this.pagename === 'coffee' ? 'getProductById' : 'getGoodsById';
+      const card = this.$store.getters[pageGetter](this.$route.params.id)
       return card;
     },
   }

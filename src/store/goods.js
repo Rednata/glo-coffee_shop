@@ -12,6 +12,9 @@ const goods = {
   getters: {
     getGoods(state) {
       return state.goods;
+    },
+    getGoodsById(state) {
+      return (id) => state.goods.find(item => item.id === Number(id))
     }
   }
 }

@@ -65,14 +65,15 @@ import { navigate } from '@/mixins/navigate';
     computed: {
       goods() {
         return this.$store.getters["getGoods"]
-      }
+      },
     },
     data() {
       return {
         name: 'goods'
       }
     },
-    mixins: [navigate]
+    mixins: [navigate],
+
   }
 </script>
 
