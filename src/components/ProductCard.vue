@@ -1,10 +1,12 @@
 <template>
-  <div :class="classItem">
-    <img :src="require(`@/assets/img/${image}`)" :alt="image">
+  <div :class="classItem" @click="onEmit(card.id)">
+    <img :src="require(`@/assets/img/${card.imgUrl}`)" :alt="card.imgUrl">
     <div class="best__item-title">
-      {{name}}
+      {{card.text}}
+
+
     </div>
-    <div class="best__item-price">{{ price }}$</div>
+    <div class="best__item-price">{{ card.price }}$</div>
   </div>
 </template>
 
@@ -15,17 +17,16 @@
         type: String,
         required: false
       },
-      name: {
-        type: String,
+      card: {
+        type: Object,
         required: true
-      },
-      price: {
-        type: Number,
-        required: true
-      },
-      image: {
-        type: String,
-        required: true
+      }
+    },
+    methods: {
+      onEmit(id) {
+        console.log('in ProductCard id: ', id);
+        this.$emit('onNavigate', id)
+
       }
     }
   }

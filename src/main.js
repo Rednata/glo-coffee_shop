@@ -5,11 +5,13 @@ import './assets/scss/style.scss'
 import router from './router/index'
 import store from './store'
 Vue.config.productionTip = false
+import './filters'
 
 // new Vue({
 //   router,
 //   render: h => h(App2),
 // }).$mount('#app')
+
 
 new Vue({
   store,

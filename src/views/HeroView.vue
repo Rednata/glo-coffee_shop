@@ -51,9 +51,7 @@
               <product-card
                 v-for="card in bestsellers"
                 classItem="best__item"
-                :name="card.text"
-                :price="card.price"
-                :image="card.imgUrl"
+                :card="card"
                 :key="card.id"
               />
             </div>
@@ -89,7 +87,8 @@ import HeaderTitle from '@/components/HeaderTitle.vue';
     },
     computed: {
       bestsellers() {
-        return this.$store.getters["getCardsBestsellers"]
+        console.log('bestsellers', this.$store.getters["getBestsellers"]);
+        return this.$store.getters["getBestsellers"]
       }
     }
     // mounted() {
