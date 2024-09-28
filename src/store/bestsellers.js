@@ -8,7 +8,6 @@ const bestsellers = {
   },
   getters: {
     getBestsellers(state) {
-      console.log('state.bestsellers: ', state.bestsellers);
       return state.bestsellers;
     }
   }

@@ -9,13 +9,23 @@ const coffee = {
       {id: 5, text: 'AROMISTICO Coffee 1kg', imgUrl: 'coffee-3.jpg', price: 6.99},
     ],
   },
+  mutations: {
+    setCoffeeData(state, data) {
+      console.log('data: ', data);
+      state.coffee = data
+    }
+  },
+  actions: {
+    setCoffeeData({commit}, data) {
+    commit('setCoffeeData', data);
+    }
+  },
   getters: {
     getCoffee(state) {
       return state.coffee;
     },
     getProductById(state) {
       return (id) => state.coffee.find((card) => card.id === Number(id));
-
     }
   }
 }

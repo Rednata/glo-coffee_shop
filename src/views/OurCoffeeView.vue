@@ -83,8 +83,6 @@ import { navigate } from '@/mixins/navigate';
     },
     computed: {
       coffee() {
-        console.log('coffee:', this.$store.getters["getCoffee"]);
-
         return this.$store.getters["getCoffee"];
       }
     },
@@ -93,7 +91,20 @@ import { navigate } from '@/mixins/navigate';
         name: 'coffee'
       }
     },
-    mixins: [navigate]
+    mixins: [navigate],
+    async mounted() {
+      const res = await fetch('http://localhost:3000/coffee')
+
+        this.$store.dispatch('setCoffeeData', await res.json())
+
+    }
+    // mounted() {
+    //   fetch('http://localhost:3000/coffee')
+    //     .then(res => res.json())
+    //     .then(data => {
+    //       this.$store.dispatch('setCoffeeData', data)
+    //     })
+    // }
   }
 </script>
 
