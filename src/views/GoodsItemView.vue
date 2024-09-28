@@ -46,15 +46,13 @@ import NavBarComponent from '@/components/NavBarComponent.vue';
   components: { NavBarComponent },
   data() {
     return {
-      product: null,
     }
   },
   mounted() {
-    fetch(`http://localhost:3000/coffee/${this.$route.params.id}`)
+    const pagePath = this.pageName === 'coffee' ? 'coffee' : 'goods'
+    fetch(`http://localhost:3000/${pagePath}/${this.$route.params.id}`)
       .then(res => res.json())
-      .then(data => (
-        this.product = data
-      ));
+      .then(data => this.$store.dispatch('setGoodsItemData', data));
   },
   destroyed() {
     this.product = null;
@@ -63,11 +61,9 @@ import NavBarComponent from '@/components/NavBarComponent.vue';
     pageName() {
       return this.$route.name
     },
-    card() {
-      const pageGetter = this.pagename === 'coffee' ? 'getProductById' : 'getGoodsById';
-      const card = this.$store.getters[pageGetter](this.$route.params.id)
-      console.log('card: ', card);
-      return card;
+    product() {
+      const product = this.$store.getters['getGoodsItem'];
+      return product;
     },
   }
   }

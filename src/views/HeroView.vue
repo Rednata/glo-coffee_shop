@@ -89,10 +89,12 @@ import HeaderTitle from '@/components/HeaderTitle.vue';
       bestsellers() {
         return this.$store.getters["getBestsellers"]
       }
+    },
+    mounted() {
+      fetch('http://localhost:3000/bestsellers')
+        .then(response => response.json())
+        .then(data => this.$store.dispatch('setBestsellersData', data))
     }
-    // mounted() {
-    //   this.smoothScroll()
-    // }
   }
 </script>
 

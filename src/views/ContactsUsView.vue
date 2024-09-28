@@ -95,7 +95,7 @@ import HeaderTitle from '@/components/HeaderTitle.vue';
       }
     },
     methods: {
-      handleSubmit() {
+      handleSubmit(e) {
         console.log('Данные формы:', JSON.parse(JSON.stringify(this.form)));
         const message = {
           name: this.form.name,
@@ -109,7 +109,8 @@ import HeaderTitle from '@/components/HeaderTitle.vue';
             'Content-Type': 'application/json'
           },
           body: JSON.stringify(message)
-        })
+        });
+        e.target.reset();
       }
     }
   }
