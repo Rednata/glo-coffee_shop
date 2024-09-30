@@ -1,8 +1,8 @@
 <template>
   <div :class="classItem" @click="onEmit(card.id)">
-    <img :src="require(`@/assets/img/${card.imgUrl}`)" :alt="card.imgUrl">
+    <img :src="card.image" :alt="card.image">
     <div class="best__item-title">
-      {{card.text}}
+      {{card.name}}
 
 
     </div>
@@ -24,7 +24,6 @@
     },
     methods: {
       onEmit(id) {
-        console.log('in ProductCard id: ', id);
         this.$emit('onNavigate', id)
 
       }

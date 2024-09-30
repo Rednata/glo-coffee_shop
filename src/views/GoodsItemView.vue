@@ -7,33 +7,30 @@
             <nav-bar-component />
           </div>
         </div>
-        <h1 class="title-big">{{ card.text }}</h1>
+        <h1 v-if="product" class="title-big">{{ product.name }}</h1>
       </div>
     </div>
 
-    <section class="shop">
+    <section v-if="product" class="shop">
       <div class="container">
         <div class="row">
           <div class="col-lg-5 offset-1">
-            <img class="shop__girl" :src="require(`@/assets/img/${card.imgUrl}`)" :alt="card.imgUrl">
+            <img class="shop__girl" :src="product.image" :alt="product.image">
           </div>
           <div class="col-lg-4">
             <div class="title">About it</div>
               <img class="beanslogo" src="@/assets/logo/Beans_logo_dark.svg" alt="Beans logo">
               <div class="shop__point">
                 <span>Country:</span>
-                  Brazil
+                  {{ product.country }}
               </div>
               <div class="shop__point">
                 <span>Description:</span>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                  labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                  consequat.
+                  {{ product.description }}
               </div>
               <div class="shop__point">
                 <span>Price: </span>
-                <span class="shop__point-price">{{ card.price | addCurrency }}</span>
+                <span class="shop__point-price">{{ product.price }}</span>
             </div>
           </div>
         </div>
@@ -47,15 +44,30 @@ import NavBarComponent from '@/components/NavBarComponent.vue';
 
   export default {
   components: { NavBarComponent },
+  data() {
+    return {
+      product: null
+    }
+  },
+  mounted() {
+      fetch(`http://localhost:3000/coffee/${this.$route.params.id}`)
+        .then(res => res.json())
+        .then(data => this.product = data);
+    },
+    destroyed() {
+      this.product = null;
+    },
   computed: {
     pageName() {
       return this.$route.name
     },
-    card() {
-      const pageGetter = this.pagename === 'coffee' ? 'getProductById' : 'getGoodsById';
-      const card = this.$store.getters[pageGetter](this.$route.params.id)
-      return card;
-    },
+  //   card() {
+  //     const pageGetter = this.pageName === 'coffee' ? 'getProductById' : 'getGoodsById';
+  //     console.log('pageGetter: ', pageGetter);
+  //     const card = this.$store.getters[pageGetter](this.$route.params.id)
+  //     console.log('card: ', card);
+  //     return card;
+  //   },
   }
   }
 </script>

@@ -87,7 +87,6 @@ import HeaderTitle from '@/components/HeaderTitle.vue';
     },
     computed: {
       bestsellers() {
-        console.log('bestsellers', this.$store.getters["getBestsellers"]);
         return this.$store.getters["getBestsellers"]
       }
     }

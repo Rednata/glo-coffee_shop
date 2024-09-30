@@ -5,6 +5,6 @@ export const navigate = {
     }
   },
   mounted() {
-    console.log('from mixin');
+    // console.log('from mixin');
   }
 }

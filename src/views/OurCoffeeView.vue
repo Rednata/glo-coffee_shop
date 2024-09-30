@@ -83,8 +83,6 @@ import { navigate } from '@/mixins/navigate';
     },
     computed: {
       coffee() {
-        console.log('coffee:', this.$store.getters["getCoffee"]);
-
         return this.$store.getters["getCoffee"];
       }
     },
@@ -93,7 +91,12 @@ import { navigate } from '@/mixins/navigate';
         name: 'coffee'
       }
     },
-    mixins: [navigate]
+    mixins: [navigate],
+    mounted() {
+      fetch('http://localhost:3000/coffee')
+        .then(res => res.json())
+        .then(data => this.$store.dispatch('setCoffeeData', data))
+    }
   }
 </script>
 
