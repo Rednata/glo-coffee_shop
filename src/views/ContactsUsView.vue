@@ -95,7 +95,7 @@ import HeaderTitle from '@/components/HeaderTitle.vue';
       }
     },
     methods: {
-      handleSubmit() {
+      handleSubmit(event) {
         const message = {
           name: this.form.name,
           email: this.form.email,
@@ -109,6 +109,8 @@ import HeaderTitle from '@/components/HeaderTitle.vue';
           headers: {'Content-Type': 'application/json'},
           body: JSON.stringify(message)
         })
+
+        event.target.reset()
       }
     }
   }

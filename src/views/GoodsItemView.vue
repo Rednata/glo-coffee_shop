@@ -46,21 +46,24 @@ import NavBarComponent from '@/components/NavBarComponent.vue';
   components: { NavBarComponent },
   data() {
     return {
-      product: null
+      // product: null
     }
   },
   mounted() {
-      fetch(`http://localhost:3000/coffee/${this.$route.params.id}`)
+      fetch(`http://localhost:3000/${this.pageName}/${this.$route.params.id}`)
         .then(res => res.json())
-        .then(data => this.product = data);
+        .then(data => this.$store.dispatch('setGoodsItem', data));
     },
     destroyed() {
-      this.product = null;
+      this.$store.dispatch('setGoodsItem', null)
     },
   computed: {
     pageName() {
       return this.$route.name
     },
+    product() {
+      return this.$store.getters['getItem'];
+    }
   //   card() {
   //     const pageGetter = this.pageName === 'coffee' ? 'getProductById' : 'getGoodsById';
   //     console.log('pageGetter: ', pageGetter);
