@@ -62,6 +62,11 @@ import { navigate } from '@/mixins/navigate';
       return {
       }
     },
+    async mounted() {
+      const res = await fetch('http://localhost:3000/goods')
+      const data = await res.json()
+      this.$store.dispatch('setGoodsData', data)
+    },
     computed: {
       goods() {
         return this.$store.getters["getGoods"]

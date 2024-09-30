@@ -71,7 +71,6 @@ import HeaderTitle from '@/components/HeaderTitle.vue';
     components: {NavBarComponent, ProductCard, HeaderTitle},
     data () {
       return {
-        
       }
     },
     methods: {
@@ -85,14 +84,16 @@ import HeaderTitle from '@/components/HeaderTitle.vue';
         });
       }
     },
+    async mounted() {
+      const res = await fetch('http://localhost:3000/bestsellers')
+      const data = await res.json()
+      this.$store.dispatch('setBestsellersData', data)
+    },
     computed: {
       bestsellers() {
         return this.$store.getters["getBestsellers"]
       }
-    }
-    // mounted() {
-    //   this.smoothScroll()
-    // }
+    },
   }
 </script>
 

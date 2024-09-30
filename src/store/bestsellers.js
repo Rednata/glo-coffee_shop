@@ -1,10 +1,20 @@
 const bestsellers = {
   state: {
     bestsellers: [
-      {id: 0, text: 'Solimo Coffee Beans 2kg', imgUrl: 'coffee-1.jpg', price: 10.73},
-      {id: 1, text: 'Presto Coffee Beans 1kg', imgUrl: 'coffee-2.jpg', price: 15.99},
-      {id: 2, text: 'AROMISTICO Coffee 1kg', imgUrl: 'coffee-3.jpg', price: 6.99},
+      // {id: 0, text: 'Solimo Coffee Beans 2kg', imgUrl: 'coffee-1.jpg', price: 10.73},
+      // {id: 1, text: 'Presto Coffee Beans 1kg', imgUrl: 'coffee-2.jpg', price: 15.99},
+      // {id: 2, text: 'AROMISTICO Coffee 1kg', imgUrl: 'coffee-3.jpg', price: 6.99},
     ]
+  },
+  mutations: {
+    setBestsellersData(state, payload) {
+      state.bestsellers = payload
+    }
+  },
+  actions: {
+    setBestsellersData({commit}, payload) {
+      commit('setBestsellersData', payload)
+    }
   },
   getters: {
     getBestsellers(state) {
