@@ -11,7 +11,7 @@ const goods = {
   },
   mutations: {
     setGoodsData(state, payload) {
-      state.goods = payload;
+      state.goods = payload
     }
   },
   actions: {

@@ -96,26 +96,5 @@
     }
   ],
   "contacts": [
-    {
-      "id": "d9c0",
-      "name": "sdf",
-      "email": "werwer@wer",
-      "phone": "123",
-      "message": "dfwer"
-    },
-    {
-      "id": "e720",
-      "name": "wer",
-      "email": "werwer@wer",
-      "phone": "34",
-      "message": "d"
-    },
-    {
-      "id": "c688",
-      "name": "wer",
-      "email": "werwer@wer",
-      "phone": "234",
-      "message": "fdfgdg"
-    }
   ]
 }

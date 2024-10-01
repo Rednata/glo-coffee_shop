@@ -95,22 +95,22 @@ import HeaderTitle from '@/components/HeaderTitle.vue';
       }
     },
     methods: {
-      handleSubmit(e) {
-        console.log('Данные формы:', JSON.parse(JSON.stringify(this.form)));
+      handleSubmit(event) {
         const message = {
           name: this.form.name,
           email: this.form.email,
           phone: this.form.phone,
           message: this.form.message,
         }
+        console.log('Данные формы:', JSON.parse(JSON.stringify(this.form)));
+
         fetch('http://localhost:3000/contacts', {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
+          headers: {'Content-Type': 'application/json'},
           body: JSON.stringify(message)
-        });
-        e.target.reset();
+        })
+
+        event.target.reset()
       }
     }
   }

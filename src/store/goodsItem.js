@@ -1,47 +1,20 @@
 const goodsItem = {
   state: {
-    initGoodsItem: {
-      country: '',
-      description: '',
-      id: '',
-      image: '',
-      name: '',
-      price: ''
-    },
-    goodsItem: {
-      country: '',
-      description: '',
-      id: '',
-      image: '',
-      name: '',
-      price: ''
-    },
-    isLoading: false,
+    item: { }
   },
   mutations: {
-    setGoodsItemData(state, payload) {
-      state.goodsItem = payload;
-    },
-    setIsLoading(state, payload) {
-      state.isLoading = payload;
+    setGoodsItem(state, payload) {
+      state.item = payload
     }
   },
   actions: {
-    setGoodsItemData({commit, state}, payload) {
-      if (payload === null) {
-        commit('setGoodsItemData', state.initGoodsItem);
-      } else commit('setGoodsItemData', payload)
-    },
-    setIsLoading({commit}, data) {
-      commit('setIsLoading', data)
+    setGoodsItem({commit}, payload) {
+      commit('setGoodsItem', payload)
     }
   },
   getters: {
-    getGoodsItem(state) {
-      return state.goodsItem;
-    },
-    isLoading(state) {
-      return state.isLoading;
+    getItem(state) {
+      return state.item
     }
   }
 }
