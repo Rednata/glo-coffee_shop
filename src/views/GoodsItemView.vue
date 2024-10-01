@@ -7,11 +7,11 @@
             <nav-bar-component />
           </div>
         </div>
-        <h1 v-if="product" class="title-big">{{ product.name }}</h1>
+        <h1 v-if="!isLoading" class="title-big">{{ product.name }}</h1>
       </div>
     </div>
 
-    <section v-if="product" class="shop">
+    <section v-if="!isLoading" class="shop">
       <div class="container">
         <div class="row">
           <div class="col-lg-5 offset-1">
@@ -36,23 +36,31 @@
         </div>
       </div>
     </section>
+    <spinner-component v-else />
    </main>
 </template>
 
 <script>
 import NavBarComponent from '@/components/NavBarComponent.vue';
+import SpinnerComponent from '@/components/SpinnerComponent.vue';
+import { preloader } from '@/mixins/preloader';
 
   export default {
-  components: { NavBarComponent },
+  components: { NavBarComponent, SpinnerComponent },
   data() {
-    return {
-      // product: null
-    }
+    return { }
   },
+  mixins: [preloader],
   mounted() {
+    console.log(`http://localhost:3000/${this.pageName}/${this.$route.params.id}`);
       fetch(`http://localhost:3000/${this.pageName}/${this.$route.params.id}`)
         .then(res => res.json())
-        .then(data => this.$store.dispatch('setGoodsItem', data));
+        .then(data => {
+          setTimeout(() => {
+            this.hideLoader();
+            this.$store.dispatch('setGoodsItem', data)
+          }, 1500)
+        });
     },
     destroyed() {
       this.$store.dispatch('setGoodsItem', null)
@@ -63,14 +71,10 @@ import NavBarComponent from '@/components/NavBarComponent.vue';
     },
     product() {
       return this.$store.getters['getItem'];
-    }
-  //   card() {
-  //     const pageGetter = this.pageName === 'coffee' ? 'getProductById' : 'getGoodsById';
-  //     console.log('pageGetter: ', pageGetter);
-  //     const card = this.$store.getters[pageGetter](this.$route.params.id)
-  //     console.log('card: ', card);
-  //     return card;
-  //   },
+    },
+    // isLoading() {
+    //   return this.$store.getters['getIsLoading'];
+    // }
   }
   }
 </script>

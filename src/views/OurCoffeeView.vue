@@ -53,7 +53,7 @@
           </div>
           <div class="row">
             <div class="col-lg-10 offset-lg-1">
-              <div class="shop__wrapper">
+              <div class="shop__wrapper" v-if="!isLoading">
                 <product-card
                   v-for="card in coffee"
                   classItem="shop__item"
@@ -61,8 +61,8 @@
                   :key="card.id"
                   @onNavigate="navigate"
                 />
-                <!-- /our-coffee/item -->
               </div>
+              <spinner-component v-else />
             </div>
           </div>
       </div>
@@ -74,28 +74,36 @@
 import NavBarComponent from '@/components/NavBarComponent.vue'
 import ProductCard from '@/components/ProductCard.vue'
 import HeaderTitle from '@/components/HeaderTitle.vue';
+import SpinnerComponent from '@/components/SpinnerComponent.vue';
 import { navigate } from '@/mixins/navigate';
+import { preloader } from '@/mixins/preloader';
   export default {
-    components: {NavBarComponent, ProductCard, HeaderTitle},
+    components: {NavBarComponent, ProductCard, HeaderTitle, SpinnerComponent},
     data () {
       return {
-      }
+        name: 'coffee'
+       }
     },
     computed: {
       coffee() {
         return this.$store.getters["getCoffee"];
-      }
+      },
+      // isLoading() {
+      //   return this.$store.getters['getIsLoading'];
+      // }
     },
-    data() {
-      return {
-        name: 'coffee'
-      }
-    },
-    mixins: [navigate],
+    mixins: [navigate, preloader],
     mounted() {
       fetch('http://localhost:3000/coffee')
-        .then(res => res.json())
-        .then(data => this.$store.dispatch('setCoffeeData', data))
+        .then(res => {
+          return res.json()
+        })
+        .then(data => {
+          setTimeout(() => {
+            this.hideLoader()
+            this.$store.dispatch('setCoffeeData', data)
+          }, 1500)
+        })
     }
   }
 </script>

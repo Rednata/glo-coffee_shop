@@ -35,7 +35,7 @@
 
         <div class="row">
           <div class="col-lg-10 offset-lg-1">
-            <div class="shop__wrapper">
+            <div class="shop__wrapper" v-if="!isLoading">
               <product-card
                 v-for="card in goods"
                 classItem="shop__item"
@@ -44,6 +44,7 @@
                 @onNavigate="navigate"
               />
             </div>
+            <spinner-component v-else />
           </div>
       </div>
     </div>
@@ -52,33 +53,36 @@
 </template>
 
 <script>
-import NavBarComponent from '@/components/NavBarComponent.vue'
-import ProductCard from '@/components/ProductCard.vue'
+import NavBarComponent from '@/components/NavBarComponent.vue';
+import ProductCard from '@/components/ProductCard.vue';
+import SpinnerComponent from '@/components/SpinnerComponent.vue';
 import HeaderTitle from '@/components/HeaderTitle.vue';
 import { navigate } from '@/mixins/navigate';
+import { preloader } from '@/mixins/preloader';
   export default {
-    components: {NavBarComponent, ProductCard, HeaderTitle},
-    data () {
-      return {
-      }
-    },
-    async mounted() {
-      const res = await fetch('http://localhost:3000/goods')
-      const data = await res.json()
-      this.$store.dispatch('setGoodsData', data)
-    },
-    computed: {
-      goods() {
-        return this.$store.getters["getGoods"]
-      },
-    },
+    components: {NavBarComponent, ProductCard, HeaderTitle, SpinnerComponent},
     data() {
       return {
         name: 'goods'
       }
     },
-    mixins: [navigate],
-
+    mixins: [navigate, preloader],
+    async mounted() {
+      const res = await fetch('http://localhost:3000/goods')
+      const data = await res.json()
+      setTimeout(() => {
+        this.hideLoader();
+        this.$store.dispatch('setGoodsData', data)
+      }, 1500)
+    },
+    computed: {
+      goods() {
+        return this.$store.getters["getGoods"]
+      },
+      // isLoading() {
+      //   return this.$store.getters['getIsLoading'];
+      // }
+    },
   }
 </script>
 
