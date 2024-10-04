@@ -35,18 +35,25 @@
             <div class="col-lg-4 offset-2">
               <form action="#" class="shop__search">
                 <label class="shop__search-label" for="filter">Looking for</label>
-                <input id="filter" type="text" placeholder="start typing here..." class="shop__search-input">
+                <input
+                  id="filter"
+                  type="text"
+                  placeholder="start typing here..."
+                  class="shop__search-input"
+                  v-model="searchValue"
+                >
+                {{ searchValue }}
               </form>
             </div>
             <div class="col-lg-4">
               <div class="shop__filter">
-                <div class="shop__filter-label">
+                <div class="shop__filter-label" @click="onResetSort">
                     Or filter
                 </div>
                 <div class="shop__filter-group">
-                  <button class="shop__filter-btn">Brazil</button>
-                  <button class="shop__filter-btn">Kenya</button>
-                  <button class="shop__filter-btn">Columbia</button>
+                  <button class="shop__filter-btn" @click="onSort('Brazil')">Brazil</button>
+                  <button class="shop__filter-btn"  @click="onSort('Kenya')">Kenya</button>
+                  <button class="shop__filter-btn" @click="onSort('Columbia')">Columbia</button>
                 </div>
               </div>
             </div>
@@ -77,6 +84,7 @@ import HeaderTitle from '@/components/HeaderTitle.vue';
 import SpinnerComponent from '@/components/SpinnerComponent.vue';
 import { navigate } from '@/mixins/navigate';
 import { preloader } from '@/mixins/preloader';
+
   export default {
     components: {NavBarComponent, ProductCard, HeaderTitle, SpinnerComponent},
     data () {
@@ -88,6 +96,14 @@ import { preloader } from '@/mixins/preloader';
       coffee() {
         return this.$store.getters["getCoffee"];
       },
+      searchValue: {
+        set(value) {
+          this.$store.dispatch('setSearchValue', value)
+        },
+        get() {
+          return this.$store.getters['getSearchValue'];
+        }
+      }
       // isLoading() {
       //   return this.$store.getters['getIsLoading'];
       // }
@@ -102,8 +118,43 @@ import { preloader } from '@/mixins/preloader';
           setTimeout(() => {
             this.hideLoader()
             this.$store.dispatch('setCoffeeData', data)
-          }, 1500)
+          }, 500)
         })
+    },
+    methods: {
+      onResetSort() {
+        this.$store.dispatch('setSortValue', '')
+      },
+      onSort(value) {
+        this.$store.dispatch('setSortValue', value)
+
+        // fetch(`http://localhost:3000/coffee?country=Brasil`)
+        // .then(res => {
+        //   return res.json()
+        // })
+        // .then(data => {
+        //   console.log('data: ', data);
+        //   setTimeout(() => {
+        //     this.hideLoader()
+        //     // this.$store.dispatch('setCoffeeData', data)
+        //   }, 500)
+        // })
+      },
+      onSearch(event) {
+        fetch(`http://localhost:3000/coffee?q=${event.target.value}`)
+        .then(res => {
+          return res.json()
+        })
+        .then(data => {
+          console.log('data: ', data);
+          setTimeout(() => {
+            this.hideLoader()
+            // this.$store.dispatch('setCoffeeData', data)
+          }, 500)
+        })
+        console.log('event: ', event.target.value);
+
+      }
     }
   }
 </script>
