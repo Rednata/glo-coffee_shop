@@ -73,7 +73,7 @@ import { preloader } from '@/mixins/preloader';
       setTimeout(() => {
         this.hideLoader();
         this.$store.dispatch('setGoodsData', data)
-      }, 1500)
+      }, 500)
     },
     computed: {
       goods() {

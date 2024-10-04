@@ -1,31 +1,55 @@
 const coffee = {
   state: {
-    coffee: [
-      // {id: 0, text: 'Solimo Coffee Beans 2kg', imgUrl: 'coffee-1.jpg', price: 10.73},
-      // {id: 1, text: 'Presto Coffee Beans 1kg', imgUrl: 'coffee-2.jpg', price: 15.99},
-      // {id: 2, text: 'AROMISTICO Coffee 1kg', imgUrl: 'coffee-3.jpg', price: 6.99},
-      // {id: 3, text: 'Solimo Coffee Beans 2kg', imgUrl: 'coffee-1.jpg', price: 10.73},
-      // {id: 4, text: 'Presto Coffee Beans 1kg', imgUrl: 'coffee-2.jpg', price: 15.99},
-      // {id: 5, text: 'AROMISTICO Coffee 1kg', imgUrl: 'coffee-3.jpg', price: 6.99},
-    ],
+    coffee: [],
+    searchValue: '',
+    sortValue: '',
   },
   mutations: {
     setCoffeeData(state, payload) {
       state.coffee = payload
+    },
+    setSearchValue(state, payload) {
+      state.searchValue = payload
+    },
+    setSortValue(state, payload) {
+      console.log('payload: ', payload);
+      state.sortValue = payload
     }
   },
   actions: {
     setCoffeeData({commit}, payload) {
       commit('setCoffeeData', payload)
+    },
+    setSearchValue({commit}, payload) {
+      commit('setSearchValue', payload)
+    },
+    setSortValue({commit}, payload) {
+      commit('setSortValue', payload)
     }
   },
   getters: {
     getCoffee(state) {
-      return state.coffee;
+      if (state.sortValue) {
+        return state.coffee
+        .filter(item => (
+          item.name.toLowerCase().includes(state.searchValue.toLowerCase())
+        ))
+        .filter(item => {
+            return item.country.toLowerCase() === state.sortValue.toLowerCase()}  
+          );
+      } else {
+        return state.coffee
+        .filter(item => (
+          item.name.toLowerCase().includes(state.searchValue.toLowerCase())
+        ))
+      }
     },
     getProductById(state) {
       return (id) => state.coffee.find((card) => card.id === Number(id));
-    }
+    },
+    getSearchValue(state) {
+      return state.searchValue;
+    },
   }
 }
 
