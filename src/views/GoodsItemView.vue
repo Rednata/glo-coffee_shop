@@ -7,11 +7,11 @@
             <nav-bar-component />
           </div>
         </div>
-        <h1 class="title-big" v-if="!isLoading">{{ product.name }}</h1>
+        <h1 v-if="!isLoading" class="title-big">{{ product.name }}</h1>
       </div>
     </div>
-    <spinner-component v-if="isLoading"/>
-    <section class="shop" v-else>
+
+    <section v-if="!isLoading" class="shop">
       <div class="container">
         <div class="row">
           <div class="col-lg-5 offset-1">
@@ -36,43 +36,45 @@
         </div>
       </div>
     </section>
+    <spinner-component v-else />
    </main>
 </template>
 
 <script>
 import NavBarComponent from '@/components/NavBarComponent.vue';
 import SpinnerComponent from '@/components/SpinnerComponent.vue';
+import { preloader } from '@/mixins/preloader';
+
   export default {
   components: { NavBarComponent, SpinnerComponent },
   data() {
-    return {
-    }
+    return { }
   },
+  mixins: [preloader],
   mounted() {
-    this.$store.dispatch('setIsLoading', true)
-    const pagePath = this.pageName === 'coffee' ? 'coffee' : 'goods'
-    fetch(`http://localhost:3000/${pagePath}/${this.$route.params.id}`)
-      .then(res => res.json())
-      .then(data => {
-        setTimeout(() => {
-          this.$store.dispatch('setGoodsItemData', data)
-          this.$store.dispatch('setIsLoading', false)
-      }, 1000)
-      });
-  },
-  destroyed() {
-    this.$store.dispatch('setGoodsItemData', null)
-  },
+    console.log(`http://localhost:3000/${this.pageName}/${this.$route.params.id}`);
+      fetch(`http://localhost:3000/${this.pageName}/${this.$route.params.id}`)
+        .then(res => res.json())
+        .then(data => {
+          setTimeout(() => {
+            this.hideLoader();
+            this.$store.dispatch('setGoodsItem', data)
+          }, 1500)
+        });
+    },
+    destroyed() {
+      this.$store.dispatch('setGoodsItem', null)
+    },
   computed: {
     pageName() {
       return this.$route.name
     },
     product() {
-      return this.$store.getters['getGoodsItem'];
+      return this.$store.getters['getItem'];
     },
-    isLoading() {
-      return this.$store.getters['isLoading'];
-    }
+    // isLoading() {
+    //   return this.$store.getters['getIsLoading'];
+    // }
   }
   }
 </script>

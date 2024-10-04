@@ -10,13 +10,13 @@ const coffee = {
     ],
   },
   mutations: {
-    setCoffeeData(state, data) {
-      state.coffee = data
+    setCoffeeData(state, payload) {
+      state.coffee = payload
     }
   },
   actions: {
-    setCoffeeData({commit}, data) {
-    commit('setCoffeeData', data);
+    setCoffeeData({commit}, payload) {
+      commit('setCoffeeData', payload)
     }
   },
   getters: {

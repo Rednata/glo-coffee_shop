@@ -8,7 +8,7 @@ const bestsellers = {
   },
   mutations: {
     setBestsellersData(state, payload) {
-      state.bestsellers = payload;
+      state.bestsellers = payload
     }
   },
   actions: {
